@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screen {
+      display: none;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e63946;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: #d62839;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    #message {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #333;
+      text-align: center;
+    }
+
+    .noBtn {
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .yesMessage {
+      color: #e63946;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    /* Confetti Hearts */
+    #confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .heart {
+      position: absolute;
+      color: #e63946;
+      animation: fall 4s linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) scale(1); opacity: 1; }
+      100% { transform: translateY(110vh) scale(0.6); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen 1: Password -->
+  <div class="screen active" id="screen1">
+    <h1>Kailan tayo nagkakilala? 💌</h1>
+    <input type="text" id="password" placeholder="MM-DD-YY" maxlength="8" oninput="formatDate(this)" />
+    <button onclick="checkPassword()">Unlock</button>
+    <div class="error" id="error"></div>
+  </div>
+
+  <!-- Screen 2: Message -->
+  <div class="screen" id="screen2">
+    <h1>hello lovieeeee</h1>
+    <p id="message">
+      HASHAHSASHASHA gusto ko lang sabihin na super happy ako na nakilala kita. thank you for being my girlfriend and bestfriend in one hihi.
+      i realized a lot of things since we started talking. i can be myself, i can be loud, i can be extra, i can be weird, and you
+      still love me for who i am. SOOO next na hehe bago pa maging lsm toh HASHAHSHAHSAH
+    </p>
+    <button onclick="goToScreen(3)">Next</button>
+  </div>
+
+  <!-- Screen 3: Valentine -->
+  <div class="screen" id="screen3">
+    <h1>Will You Be My Valentine? 💖</h1>
+    <img id="valImg" src="your-image-here.jpg" alt="Valentine" style="max-width:260px; margin:20px auto; display:block; border-radius:16px;" />
+    <div>
+      <button onclick="yesClicked()">Yes :></button>
+      <button id="noBtn" class="noBtn" onmouseenter="moveNo()">No (why? :<)</button>
+    </div>
+    <p id="yesMessage" class="yesMessage" style="display:none;">You just made me the happiest person ever 💕</p>
+    <div id="confetti-container"></div>
+  </div>
+
+  <!-- Screen 4: Final Reveal -->
+  <div class="screen" id="screen4">
+    <h1>Happy Valentine’s Day HIHI</h1>
+    <img src="your-final-image.jpg" style="max-width:280px; display:block; margin:20px auto; border-radius:16px;" alt="Together">
+  </div>
+
+<script>
+  // Format password as MM-DD-YY automatically
+  function formatDate(input) {
+    let value = input.value.replace(/\D/g, "");
+    if (value.length > 2) value = value.slice(0,2) + "-" + value.slice(2);
+    if (value.length > 5) value = value.slice(0,5) + "-" + value.slice(5,7);
+    input.value = value;
+  }
+
+  // Password check
+  function checkPassword() {
+    const input = document.getElementById("password").value.trim();
+    const error = document.getElementById("error");
+    if (input === "07-19-25") {
+      goToScreen(2);
+    } else {
+      error.textContent = "Nakalimutan mo ata :<";
+    }
+  }
+
+  // Navigate screens
+  function goToScreen(number) {
+    document.querySelectorAll(".screen").forEach(screen => {
+      screen.classList.remove("active");
+    });
+    document.getElementById("screen"+number).classList.add("active");
+  }
+
+  // Heart confetti
+  function launchConfetti() {
+    const container = document.getElementById("confetti-container");
+    for (let i=0;i<40;i++){
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.animationDuration = 3 + Math.random()*2 + "s";
+      heart.style.fontSize = 16 + Math.random()*20 + "px";
+      container.appendChild(heart);
+      setTimeout(()=>heart.remove(), 5000);
+    }
+  }
+
+  // Yes button clicked
+  function yesClicked() {
+    launchConfetti();
+    document.getElementById("yesMessage").style.display = "block";
+    document.getElementById("noBtn").style.display = "none";
+    document.getElementById("valImg").src = "your-happy-image.jpg"; // optional happy image
+
+    // Move to final screen after 3 seconds
+    setTimeout(() => {
+      goToScreen(4);
+    }, 3000);
+  }
+
+  // No button dodge
+  function moveNo() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random()*120 - 60;
+    const y = Math.random()*80 - 40;
+    btn.style.transform = `translate(${x}px,${y}px)`;
+  }
+</script>
+
+</body>
+</html>
