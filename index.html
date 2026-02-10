@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>For You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nyenyenye</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       margin: 0;
+      padding: 20px;
       font-family: "Arial", sans-serif;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -17,7 +23,7 @@
     .screen {
       display: none;
       background: white;
-      padding: 40px;
+      padding: 30px;
       border-radius: 16px;
       width: 90%;
       max-width: 400px;
@@ -32,26 +38,30 @@
     h1 {
       margin-bottom: 20px;
       color: #e63946;
+      font-size: clamp(1.5rem, 4vw, 1.8rem);
     }
 
     input {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       font-size: 16px;
       margin-bottom: 20px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      text-align: center;
     }
 
     button {
       background: #e63946;
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 14px 28px;
       font-size: 16px;
       border-radius: 25px;
       cursor: pointer;
-      margin: 5px;
+      margin: 8px;
+      transition: all 0.2s ease;
+      min-width: 120px;
     }
 
     button:hover {
@@ -61,10 +71,11 @@
     .error {
       color: red;
       margin-top: 10px;
+      min-height: 20px;
     }
 
     #message {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.6;
       margin-bottom: 30px;
       color: #333;
@@ -73,7 +84,6 @@
 
     .noBtn {
       position: relative;
-      transition: transform 0.2s ease;
     }
 
     .yesMessage {
@@ -82,27 +92,70 @@
       margin-top: 20px;
     }
 
-    /* Confetti Hearts */
-    #confetti-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 999;
+    /* Mobile-specific styles */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .screen {
+        padding: 25px 20px;
+        width: 95%;
+        margin: 0 auto;
+      }
+      
+      h1 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+      
+      input {
+        padding: 12px;
+        font-size: 15px;
+        margin-bottom: 15px;
+      }
+      
+      button {
+        padding: 12px 20px;
+        font-size: 15px;
+        min-width: 110px;
+        margin: 5px;
+      }
+      
+      #message {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      
+      img {
+        max-width: 100% !important;
+        height: auto;
+      }
     }
 
-    .heart {
-      position: absolute;
-      color: #e63946;
-      animation: fall 4s linear forwards;
+    @media (max-width: 350px) {
+      .screen {
+        padding: 20px 15px;
+      }
+      
+      h1 {
+        font-size: 1.2rem;
+      }
+      
+      button {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-width: 100px;
+      }
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-10vh) scale(1); opacity: 1; }
-      100% { transform: translateY(110vh) scale(0.6); opacity: 0; }
+    /* For very small screens */
+    @media (max-height: 600px) {
+      body {
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
     }
   </style>
 </head>
@@ -110,7 +163,7 @@
 
   <!-- Screen 1: Password -->
   <div class="screen active" id="screen1">
-    <h1>Kailan tayo nagkakilala? 💌</h1>
+    <h1>Kailan tayo nagkakilala? HASHAHSA</h1>
     <input type="text" id="password" placeholder="MM-DD-YY" maxlength="8" oninput="formatDate(this)" />
     <button onclick="checkPassword()">Unlock</button>
     <div class="error" id="error"></div>
@@ -118,31 +171,33 @@
 
   <!-- Screen 2: Message -->
   <div class="screen" id="screen2">
-    <h1>hello lovieeeee</h1>
+    <h1>hello lovieee hihi</h1>
     <p id="message">
-      HASHAHSASHASHA gusto ko lang sabihin na super happy ako na nakilala kita. thank you for being my girlfriend and bestfriend in one hihi.
-      i realized a lot of things since we started talking. i can be myself, i can be loud, i can be extra, i can be weird, and you
-      still love me for who i am. SOOO next na hehe bago pa maging lsm toh HASHAHSHAHSAH
+      HASHAHSAHSHAHAH gusto ko lang sabihin na super happy ako na nakilala kita. thank you for being my girlfriend and bestfriend in one HIHI 
+      i realized a lot of things since we started talking. naalala ko yung vow sa tiktok na "i used to tone down myself to be loved, but then i met you"
+      i imediately thought about you, i can be myself, i can be loud, i can be extra, i can be weird, and you still love me for who i am. 
+      thank you :( i love you so much hehe SOOO next na hehe bago pa maging lsm toh HASHAHSHASHAHSHA
     </p>
     <button onclick="goToScreen(3)">Next</button>
   </div>
 
   <!-- Screen 3: Valentine -->
   <div class="screen" id="screen3">
-    <h1>Will You Be My Valentine? 💖</h1>
-    <img id="valImg" src="your-image-here.jpg" alt="Valentine" style="max-width:260px; margin:20px auto; display:block; border-radius:16px;" />
+    <h1>Will You Be My Valentine? </h1>
+    <img id="valImg" src="924d947b56c2ec6aae2501a5d1978b74.jpg" alt="Valentine" style="max-width:260px; margin:20px auto; display:block; border-radius:16px;" />
     <div>
-      <button onclick="yesClicked()">Yes :></button>
-      <button id="noBtn" class="noBtn" onmouseenter="moveNo()">No (why? :<)</button>
+      <button onclick="yesClicked()"> Yes </button>
+      <button id="noBtn" class="noBtn" onclick="shrinkNo()">No ( why? :< )</button>
     </div>
-    <p id="yesMessage" class="yesMessage" style="display:none;">You just made me the happiest person ever 💕</p>
-    <div id="confetti-container"></div>
+    <p id="yesMessage" class="yesMessage" style="display:none;">YAYAYYAYAYAYYAYA</p>
   </div>
 
   <!-- Screen 4: Final Reveal -->
   <div class="screen" id="screen4">
-    <h1>Happy Valentine’s Day HIHI</h1>
-    <img src="your-final-image.jpg" style="max-width:280px; display:block; margin:20px auto; border-radius:16px;" alt="Together">
+    <h1>Happy Valentine's Day! 💖</h1>
+    <p style="font-size:18px; max-width: 320px; margin: 20px auto; text-align:center;">
+    </p>
+    <img src="5e61c2bf315d69194296a89921769a03.jpg" style="max-width:280px; display:block; margin:20px auto; border-radius:16px;" alt="Together">
   </div>
 
 <script>
@@ -167,47 +222,54 @@
 
   // Navigate screens
   function goToScreen(number) {
-    document.querySelectorAll(".screen").forEach(screen => {
+    const screens = document.querySelectorAll(".screen");
+    screens.forEach(screen => {
+      screen.style.display = "none";
       screen.classList.remove("active");
     });
-    document.getElementById("screen"+number).classList.add("active");
-  }
-
-  // Heart confetti
-  function launchConfetti() {
-    const container = document.getElementById("confetti-container");
-    for (let i=0;i<40;i++){
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random()*100 + "vw";
-      heart.style.animationDuration = 3 + Math.random()*2 + "s";
-      heart.style.fontSize = 16 + Math.random()*20 + "px";
-      container.appendChild(heart);
-      setTimeout(()=>heart.remove(), 5000);
-    }
+    const next = document.getElementById("screen" + number);
+    next.style.display = "block";
+    next.classList.add("active");
   }
 
   // Yes button clicked
   function yesClicked() {
-    launchConfetti();
-    document.getElementById("yesMessage").style.display = "block";
-    document.getElementById("noBtn").style.display = "none";
-    document.getElementById("valImg").src = "your-happy-image.jpg"; // optional happy image
+    // Hide all content in screen3
+    document.querySelectorAll("#screen3 *").forEach(el => {
+      el.style.display = "none";
+    });
 
-    // Move to final screen after 3 seconds
-    setTimeout(() => {
-      goToScreen(4);
-    }, 3000);
+    // Immediately go to final screen
+    goToScreen(4);
   }
 
-  // No button dodge
-  function moveNo() {
+  // No button shrink on each click
+  let noBtnSize = 100;
+  function shrinkNo() {
     const btn = document.getElementById("noBtn");
-    const x = Math.random()*120 - 60;
-    const y = Math.random()*80 - 40;
-    btn.style.transform = `translate(${x}px,${y}px)`;
+    noBtnSize *= 0.8;
+    if (noBtnSize < 20) noBtnSize = 20;
+    btn.style.transform = `scale(${noBtnSize/100})`;
+    
+    // Add a little shake effect on mobile
+    if (window.innerWidth <= 480) {
+      btn.style.animation = 'shake 0.5s';
+      setTimeout(() => {
+        btn.style.animation = '';
+      }, 500);
+    }
   }
+
+  // Add CSS for shake animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  `;
+  document.head.appendChild(style);
 </script>
 
 </body>
